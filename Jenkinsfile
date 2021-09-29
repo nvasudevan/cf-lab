@@ -1,38 +1,20 @@
 pipeline {
-    agent any
-
+    agent { docker { image 'python:3.9-alpine' } }
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                sh 'echo "Hello World"'
-                sh '''
-                    date
-                    echo "Multiline shell steps works too"
-                    ls -lah
-                    java -version
-                '''
+                sh 'python --version'
             }
         }
-        stage('Test') {
+        stage('test') {
             steps {
-                sh '''
-                    date
-                    echo "Multiline shell steps works too"
-                    ls -lah
-                    javac -version
-                '''
+                sh 'python -c "import os; print(os.name)"'
             }
         }
-        stage('Deploy') {
+        stage('deploy') {
             steps {
-                sh '''
-                    date
-                    echo "Multiline shell steps works too"
-                    ls -lah
-                    java -help
-                '''
+                sh 'python -c "sum=2+2;print(sum)"'
             }
-        }        
+        }
     }
 }
-
