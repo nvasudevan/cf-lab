@@ -4,8 +4,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "=> $(date)"
-                echo 'Building Hello World ...'
+                sh 'echo "Hello World"'
+                sh '''
+                    date
+                    echo "Multiline shell steps works too"
+                    ls -lah
+                    java -version
+                '''`
             }
         }
         stage('Test') {
