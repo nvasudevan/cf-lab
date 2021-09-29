@@ -15,14 +15,22 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo "=> $(date)"
-                echo 'Testing Hello World ...'
+                sh '''
+                    date
+                    echo "Multiline shell steps works too"
+                    ls -lah
+                    javac -version
+                '''
             }
         }
         stage('Deploy') {
             steps {
-                echo "=> $(date)"
-                echo 'Deploying Hello World ...'
+                sh '''
+                    date
+                    echo "Multiline shell steps works too"
+                    ls -lah
+                    java -jar
+                '''
             }
         }        
     }
