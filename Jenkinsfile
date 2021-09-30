@@ -1,5 +1,10 @@
 pipeline {
     agent none
+
+    options {
+        ansiColor('xterm')
+    }
+
     stages {
         stage('build') {
             agent { docker { image 'python:3.9-alpine' } }
@@ -34,12 +39,29 @@ pipeline {
                 dir(path: env.BUILD_ID) {
                     unstash(name: 'compiled-results')
                     sh '''
-                        ls -la src/
+                        ls -la 
                         pip install -U troposphere
                         python src/ec2.py
                         ls -al ./ ./src/
                        '''
+                    stash(name: 'cf-json', includes: 'cf-lab.json' )
                 }
+            }
+        }
+        stage('terraform') {
+            agent any
+            environment {
+                IMAGE = "hashicorp/terraform"
+                JSON_DIR = env.BUILD_ID
+            }
+            steps {
+                dir(path: $JSON_DIR) {
+                    unstash(name: 'cf-json')
+                }
+                sh '''
+                    ls -la 
+                    docker run -v $JSON_DIR:/json ${IMAGE} version
+                '''
             }
         }
     }
