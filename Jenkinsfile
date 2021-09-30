@@ -21,7 +21,7 @@ pipeline {
                     env
                     id
                     pip install -U pytest troposphere
-                    py.test --verbose --junit-xml test-reports/results.xml ec2_test.py
+                    py.test --verbose --junit-xml test-reports/results.xml src/ec2_test.py
                    '''
             }
             post {
