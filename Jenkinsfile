@@ -32,7 +32,7 @@ pipeline {
             agent { docker { image 'jenkins-python3' } }
             steps {
                 dir(path: env.BUILD_ID) {
-                    unstash(name: 'compiled_results')
+                    unstash(name: 'compiled-results')
                     sh '''
                         ls -la src/
                         pip install -U troposphere
