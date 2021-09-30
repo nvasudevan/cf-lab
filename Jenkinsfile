@@ -52,7 +52,7 @@ pipeline {
             agent any
             environment {
                 IMAGE = "hashicorp/terraform"
-                JSON_DIR = env.BUILD_ID
+                JSON_DIR = 'env.BUILD_ID'
             }
             steps {
                 dir(path: $JSON_DIR) {
