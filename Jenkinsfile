@@ -13,7 +13,7 @@ pipeline {
             steps {
                 sh '''
                     env
-                    id -a
+                    id
                     pip install -U pytest troposphere
                     py.test --verbose --junit-xml test-reports/results.xml ec2_test.py
                    '''
