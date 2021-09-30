@@ -9,7 +9,7 @@ pipeline {
             }
         }
         stage('build-docker') {
-            agent { label 'docker' }
+            agent { label 'master' }
             steps {
                 sh 'docker build -t jenkins-python3 .'
             }
