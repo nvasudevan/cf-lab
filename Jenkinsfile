@@ -8,8 +8,13 @@ pipeline {
                 stash(name: 'compiled-results', includes: 'src/*.py*' )
             }
         }
+        stage('build-docker') {
+            steps {
+                sh 'docker build -t jenkins-python3 .'
+            }
+        }
         stage('test') {
-            agent { docker { image 'python-3.9-alpine' } }
+            agent { docker { image 'jenkins-python3' } }
             steps {
                 sh '''
                     env
