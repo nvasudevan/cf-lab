@@ -7,3 +7,4 @@ ARG gid=1000
 ARG JENKINS_AGENT_HOME=/home/${user}
 
 RUN adduser -u ${uid} -g ${gid} -h ${JENKINS_AGENT_HOME} -D ${user}
+ENV PATH "${JENKINS_AGENT_HOME}/.local/bin:${PATH}"
