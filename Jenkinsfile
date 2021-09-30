@@ -12,7 +12,7 @@ pipeline {
             agent { docker { image 'python:3.9-alpine' } }
             steps {
                 sh '''
-                    pip install pytest troposphere
+                    pip install -U pytest troposphere
                     py.test --verbose --junit-xml test-reports/results.xml ec2_test.py
                    '''
             }
