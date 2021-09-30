@@ -44,7 +44,7 @@ pipeline {
                         python src/ec2.py
                         ls -al ./ ./src/
                        '''
-                    stash(name: 'cf-json', includes: 'cf-lab.json' )
+                    stash(name: 'cf-json', includes: 'cf_lab.json' )
                 }
             }
         }
