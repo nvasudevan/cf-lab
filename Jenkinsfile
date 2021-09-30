@@ -5,7 +5,7 @@ pipeline {
             agent { docker { image 'python:3.9-alpine' } }
             steps {
                 sh 'python -m py_compile src/ec2.py'
-                stash(name: 'compiled-results', includes: 'src/*.py.*' )
+                stash(name: 'compiled-results', includes: 'src/*.py*' )
             }
         }
         stage('test') {
