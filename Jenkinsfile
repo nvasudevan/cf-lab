@@ -9,7 +9,7 @@ pipeline {
             }
         }
         stage('test') {
-            agent { docker { image 'python:3.9-alpine' } }
+            agent { docker { image 'python-3.9-alpine' } }
             steps {
                 sh '''
                     env
