@@ -63,6 +63,6 @@ if __name__ == '__main__':
     my_ec2 = MyEc2Template("cflab")
     my_ec2.ec2_template()
     print(f"ec2 json:\n{my_ec2.tmpl.to_json()}")
-    jsonp = "/home/krish/kv/tf-cloud/cf/cf_lab.json"
+    jsonp = "./cf_lab.json"
     with open(jsonp, "w+") as cf_lab_json:
         cf_lab_json.write(my_ec2.tmpl.to_json())

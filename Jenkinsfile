@@ -18,8 +18,6 @@ pipeline {
             agent { docker { image 'jenkins-python3' } }
             steps {
                 sh '''
-                    env
-                    id
                     pip install -U pytest troposphere
                     py.test --verbose --junit-xml test-reports/results.xml src/ec2_test.py
                    '''
@@ -31,9 +29,17 @@ pipeline {
             }
         }
         stage('deploy') {
-            agent { docker { image 'python:3.9-alpine' } }
+            agent { docker { image 'jenkins-python3' } }
             steps {
-                sh 'python -c "sum=2+2;print(sum)"'
+                dir(path: env.BUILD_ID) {
+                    unstash(name: 'compiled_results')
+                    sh '''
+                        ls -la src/
+                        pip install -U troposphere
+                        python src/ec2.py
+                        ls -al ./ ./src/
+                       '''
+                }
             }
         }
     }
