@@ -55,12 +55,12 @@ pipeline {
                 JSON_DIR = 'env.BUILD_ID'
             }
             steps {
-                dir(path: $JSON_DIR) {
+                dir(path: ${JSON_DIR}) {
                     unstash(name: 'cf-json')
                 }
                 sh '''
                     ls -la 
-                    docker run -v $JSON_DIR:/json ${IMAGE} version
+                    docker run -v ${JSON_DIR}:/json ${IMAGE} version
                 '''
             }
         }
