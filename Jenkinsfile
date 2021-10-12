@@ -49,7 +49,7 @@ pipeline {
             }
         }
         stage('terraform') {
-            agent any
+            agent { docker { image 'alpine' } }
             environment {
                 IMAGE = "hashicorp/terraform"
                 JSON_DIR = "${BUILD_ID}"
